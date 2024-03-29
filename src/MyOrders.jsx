@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [currentOrderType,setCurrentOrderType] = useState('current');
+
+
 
   useEffect(() => {
     // Mock order data
@@ -37,44 +40,21 @@ const MyOrders = () => {
     setOrders(mockOrders);
   }, []);
 
+  const toggleOrderType = ()=>{
+    setCurrentOrderType(currentOrderType === 'past' ? 'current': 'past');
+  }
+
   return (
-    <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-4">My Orders</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {orders.map(order => (
-          <div key={order.orderId} className="border border-gray-200 rounded-md p-4">
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-500">Order ID: {order.orderId}</span>
-              <span className="text-gray-500">Order Date: {order.orderDate}</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-500">Delivery Date: {order.deliveryDate}</span>
-              <span className="text-gray-500">Pickup Date: {order.pickupDate}</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-500">Total Amount: {order.totalOrderAmount}</span>
-              <span className="text-gray-500">Stage: {order.stage}</span>
-            </div>
-            {/* Additional details */}
-            <div className="mt-4">
-              <h2 className="text-xl font-semibold mb-2">Items:</h2>
-              {order.items.map(item => (
-                <div key={item.productName} className="flex items-center mb-2">
-                  <img src={item.imageUrl} alt={item.productName} className="w-12 h-12 mr-2 rounded-md" />
-                  <div>
-                    <p className="text-gray-800">{item.productName}</p>
-                    <p className="text-gray-500">Size: {item.size}</p>
-                    <p className="text-gray-500">Quantity: {item.quantity}</p>
-                    <p className="text-gray-500">Rent: {item.rent}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* Button to raise ticket */}
-            <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Raise Ticket</button>
-          </div>
-        ))}
-      </div>
+    <div className='flex flex-col mt-4 justify-center items-center '>
+     <div className='flex justify-center'>
+        <h1 className='text-3xl'> My orders </h1>
+     </div>
+     <div className='border flex justify-between  align-middle items-center h-auto p-4 border-gray-200 '>
+       <h1 className='text-3xl'>{currentOrderType === 'past'? 'Past Orders': 'Current Order'} Details</h1>
+      <button className=' bg-blue-500 text-white px-4 py-2 rounded-md m-4 ' onClick={toggleOrderType}>
+   {currentOrderType === 'past' ? 'Show Current Orders' : 'Show Past Orders'}
+      </button>
+     </div>
     </div>
   );
 };
