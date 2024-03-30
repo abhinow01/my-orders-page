@@ -31,9 +31,9 @@ const Sidebar = ({ isOpen, onClose }) => {
   const sidebarClass = isOpen ? "translate-x-0" : "translate-x-full";
 
   return (
-    <div ref={sidebarRef} className={`fixed top-0 right-0 h-screen w-64 bg-gray-800 text-white p-4 transition-transform duration-300 transform ${sidebarClass}`}>
+    <div ref={sidebarRef} className={`fixed border top-0 right-0 h-screen w-64 bg-white  text-gray-600 p-4 transition-transform duration-300 transform ${sidebarClass}`}>
       {/* Close button */}
-      <button className="absolute top-2 right-2 text-white" onClick={onClose}>
+      <button className="absolute top-2 right-2 text-gray-600 " onClick={onClose}>
         <FaTimes />
       </button>
       {/* User dropdown */}
@@ -47,27 +47,27 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Dropdown options */}
         {dropdownOpen && (
           <div className="pl-4">
-            <button className="text-left w-full py-2 px-4 hover:bg-gray-700">My Account</button>
-            <button className="text-left w-full py-2 px-4 hover:bg-gray-700">My Wallet</button>
-            <Link to="/my-orders" className="text-left w-full py-2 px-4 flex items-center justify-between hover:bg-gray-700">
+            <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">My Account</button>
+            <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">My Wallet</button>
+            <Link to="/my-orders" className="text-left w-full py-2 px-4 flex items-center justify-between hover:bg-gray-100  rounded-lg ">
           <div className="flex items-center">
            My orders 
           </div>
         </Link>
-            <button className="text-left w-full py-2 px-4 hover:bg-gray-700">My Cart</button>
+            <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">My Cart</button>
           </div>
         )}
       </div>
       {/* Other sidebar options */}
       <div>
-        <button className="text-left w-full py-2 px-4 hover:bg-gray-700">Rent/Buy</button>
-        <button className="text-left w-full py-2 px-4 hover:bg-gray-700">Refurbished</button>
-        <button className="text-left w-full py-2 px-4 hover:bg-gray-700">Policies</button>
-        <button className="text-left w-full py-2 px-4 hover:bg-gray-700">FAQ</button>
-        <button className="text-left w-full py-2 px-4 hover:bg-gray-700">Socials</button>
+        <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">Rent/Buy</button>
+        <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">Refurbished</button>
+        <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">Policies</button>
+        <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">FAQ</button>
+        <button className="text-left w-full py-2 px-4 hover:bg-gray-100  rounded-lg ">Socials</button>
       </div>
       {/* Logout button */}
-      <div className="mt-auto">
+      <div className="flex flex-1">
         <button className="text-left w-full py-2 px-4 bg-red-500 hover:bg-red-600">Logout</button>
       </div>
     </div>
