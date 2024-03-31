@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import OrderModal from './OrderModal';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [currentOrderType,setCurrentOrderType] = useState('current');
-
+  const [selectedOrder,setSlectedOrder] = useState(null);
 
 
   useEffect(() => {
@@ -149,35 +150,64 @@ const MyOrders = () => {
   }
 
   const filteredOrders = currentOrderType === 'Current' ? orders.filter(order => order.currentStage === 'Current') : orders.filter(order => order.currentStage === 'Past');
+ 
+  const handleOrderClick = (order)=>{
+    setSlectedOrder(order);
+  } 
+
+  const handleCloseModal = () =>{
+    setSlectedOrder(null);
+  };
+
 
   return (
-    <div className='flex flex-col mt-4 justify-center items-center'>
-    <div className='flex w-full'>
-      <div>
-        <h1 className='text-3xl'>My orders</h1>
-      </div>
-    </div>
-    <div className='border flex flex-col justify-between items-center align-middle  h-auto p-4 border-gray-200'>
-        <div className='flex justify-between items-center'>
-      <h1 className='text-3xl'>{currentOrderType === 'past'? 'Past Orders': 'Current Orders'} </h1>
-      <button className='bg-blue-500 text-white px-4 py-2 rounded-md m-4' onClick={toggleOrderType}>
-            {currentOrderType === 'past' ? 'b' : 'b'}
-          </button>
-          </div>
-      {/* Display filtered orders */}
-      <div className='flex flex-col'>
-      {filteredOrders.map(order => (
-        <div key={order.orderId} className='flex flex-col justify-center items-center'>
-          {order.items.map(item => (
-            <div key={item.productName}>
-              {item.productName}
-            </div>
-          ))}
+<div className="flex flex-col mt-4 justify-center items-center">
+      <div className="flex w-full">
+        <div>
+          <h1 className="text-3xl">My Orders</h1>
         </div>
-      ))}
       </div>
+      <div className="border flex flex-col justify-between items-center align-middle h-auto p-4 border-gray-200">
+        <div className="flex justify-between items-center w-full">
+          <h1 className="text-3xl">{currentOrderType === 'past' ? 'Past Orders' : 'Current Orders'}</h1>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md m-4" onClick={toggleOrderType}>
+            {currentOrderType === 'past' ? 'View Current Orders' : 'View Past Orders'}
+          </button>
+        </div>
+        {/* Display filtered orders */}
+        <div className="w-full">
+          <table className="w-full table-auto">
+            <thead>
+              <tr>
+                <th className="px-4 py-2">Order ID</th>
+                <th className="px-4 py-2">Order Date</th>
+                <th className="px-4 py-2">Delivery Date</th>
+                <th className="px-4 py-2">Pickup Date</th>
+                <th className="px-4 py-2">Total Amount</th>
+                <th className="px-4 py-2">Order Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredOrders.map((order) => (
+                <tr
+                  key={order.orderId}
+                  className="hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleOrderClick(order)}
+                >
+                  <td className="border px-4 py-2">{order.orderId}</td>
+                  <td className="border px-4 py-2">{order.orderDate}</td>
+                  <td className="border px-4 py-2">{order.deliveryDate}</td>
+                  <td className="border px-4 py-2">{order.pickupDate}</td>
+                  <td className="border px-4 py-2">{order.totalOrderAmount}</td>
+                  <td className="border px-4 py-2">{order.orderStatus}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {selectedOrder && <OrderModal order={selectedOrder} onClose={handleCloseModal} />}
     </div>
-  </div>
   );
 };
 
