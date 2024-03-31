@@ -146,11 +146,14 @@ const MyOrders = () => {
   }, []);
 
   const toggleOrderType = ()=>{
-    setCurrentOrderType(currentOrderType === 'past' ? 'current': 'past');
+    setCurrentOrderType((prevType) => (prevType === 'past' ? 'current': 'past'));
+    // setCurrentOrderType(null);
   }
 
-  const filteredOrders = currentOrderType === 'Current' ? orders.filter(order => order.currentStage === 'Current') : orders.filter(order => order.currentStage === 'Past');
- 
+  const filteredOrders = currentOrderType === 'current'
+  ? orders.filter((order) => order.currentStage === 'Current')
+  : orders.filter((order) => order.currentStage === 'Past');
+
   const handleOrderClick = (order)=>{
     setSlectedOrder(order);
   } 
@@ -162,20 +165,21 @@ const MyOrders = () => {
 
   return (
 <div className="flex flex-col mt-4 justify-center items-center">
-      <div className="flex w-full">
+      <div className="flex flex-col w-full">
         <div>
-          <h1 className="text-3xl">My Orders</h1>
+          <h1 className="text-3xl p-4 ">My Orders</h1>
         </div>
+        {/* <div className=' m-2 flex justify-center items-center  border w-3/4  border-zinc-400 '></div> */}
       </div>
-      <div className="border flex flex-col justify-between items-center align-middle h-auto p-4 border-gray-200">
+      <div className=" border flex flex-col justify-between items-center align-middle h-auto p-4 border-gray-200 w-4/5 ">
         <div className="flex justify-between items-center w-full">
-          <h1 className="text-3xl">{currentOrderType === 'past' ? 'Past Orders' : 'Current Orders'}</h1>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md m-4" onClick={toggleOrderType}>
+          <h4 className="text-2xl">{currentOrderType === 'past' ? 'Past Orders' : 'Current Orders'}</h4>
+          <button className="bg-blue-900 text-white px-4 py-2 rounded-md m-4" onClick={toggleOrderType}>
             {currentOrderType === 'past' ? 'View Current Orders' : 'View Past Orders'}
           </button>
         </div>
         {/* Display filtered orders */}
-        <div className="w-full">
+        <div className="w-full p-4 ">
           <table className="w-full table-auto">
             <thead>
               <tr>
