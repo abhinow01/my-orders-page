@@ -1,6 +1,22 @@
 import React from 'react';
 import { useState,useEffect,useRef } from 'react';
+import OrderStepper from './OrderStepper';
 
+const orderStages = [
+
+  'Order Confirmed',
+  'Quality Checked',
+  'Order Packed',
+  'Pickup Scheduled',
+  'Pickup Due',
+  'Order Delivered',
+  'Order Received',
+  'KYC Received',
+  // Add more stages as needed
+];
+  const handleRaiseTicket =()=>{
+    console.log('raise ticket');
+  }
 const OrderModal = ({order,onClose}) => {
     if(!order)
     return null;
@@ -21,40 +37,41 @@ const modalRef = useRef(null);
     },[onClose]);
 
   return (
-    <div className='fixed inset-0 flex mt-4 justify-center items-center  border '>
+    <div className='fixed inset-0 flex mt-4 justify-center items-center  '>
         <div ref={modalRef} className='absolute top-20 bg-white rounded-lg shadow-lg p-6 max-h-full overflow-auto '>
             <div className='flex flex-row justify-between align-middle '>
-        <h2 className="text-xl font-bold">Order Details</h2>
+        <h2 className="text-xl font-bold p-2 mb-2 ">Order Details</h2>
             <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             </div>
+            <OrderStepper currentStage={order.orderStatus} stages={orderStages} />
             <div className='grid grid-cols-2 gap-4 '>
             <div>
-                <p className='text-gray-600'>ORDER ID:</p>
-                <p className='font-bold'>{order.orderId}</p>
+                <p className=' font-bold'>ORDER ID:</p>
+                <p className='text-gray-600'>{order.orderId}</p>
             </div>
             <div>
-              <p className="text-gray-600">Order Date:</p>
-              <p className="font-bold">{order.orderDate}</p>
+              <p className="font-bold">Order Date:</p>
+              <p className="text-gray-600">{order.orderDate}</p>
             </div>
             <div>
-              <p className="text-gray-600">Delivery Date:</p>
-              <p className="font-bold">{order.deliveryDate}</p>
+              <p className="font-bold">Delivery Date:</p>
+              <p className="text-gray-600 ">{order.deliveryDate}</p>
             </div>
             <div>
-              <p className="text-gray-600">Pickup Date:</p>
-              <p className="font-bold">{order.pickupDate}</p>
+              <p className="font-bold">Pickup Date:</p>
+              <p className="text-gray-600 ">{order.pickupDate}</p>
             </div>
             <div>
-              <p className="text-gray-600">Total Amount:</p>
-              <p className="font-bold">{order.totalOrderAmount}</p>
+              <p className="font-bold">Total Amount:</p>
+              <p className="text-gray-600 ">{order.totalOrderAmount}</p>
             </div>
             <div>
-              <p className="text-gray-600">Order Status:</p>
-              <p className="font-bold">{order.orderStatus}</p>
+              <p className="font-bold">Order Status:</p>
+              <p className="text-gray-600">{order.orderStatus}</p>
             </div>
             </div>
             <div className='mt-6'>
@@ -71,6 +88,14 @@ const modalRef = useRef(null);
                 </div>
             ))}
             </div>
+            <div className="flex justify-center mt-6">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleRaiseTicket}
+          >
+            Raise Ticket
+          </button>
+        </div>
         </div>
         </div>
 
