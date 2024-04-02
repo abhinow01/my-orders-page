@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState,useEffect,useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import OrderStepper from './OrderStepper';
 
 const orderStages = [
@@ -14,13 +15,12 @@ const orderStages = [
   'KYC Received',
   // Add more stages as needed
 ];
-  const handleRaiseTicket =()=>{
-    console.log('raise ticket');
-  }
+  
 const OrderModal = ({order,onClose}) => {
     if(!order)
     return null;
 const modalRef = useRef(null);
+  const navigate = useNavigate();
 
     useEffect(()=>{
     const handleClickOutside = (event)=>{
@@ -35,6 +35,10 @@ const modalRef = useRef(null);
     };
 
     },[onClose]);
+    
+    const handleRaiseTicket = () => {
+      navigate(`/raise-ticket?orderId=${order.orderId}`);
+    };
 
   return (
     <div className='fixed inset-0 flex mt-4 justify-center items-center  '>
