@@ -26,10 +26,10 @@ const RaiseTicket = () => {
   const notify = () => toast('Ticket submitted, feel free to raise another one !');
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 px-4">
       <ToastContainer />
-      <h2 className="text-2xl font-bold mb-4">Raise Ticket</h2>
-      <p className="mb-4">Order ID: {orderId}</p>
+      <h2 className="text-2xl font-bold mb-4 text-center">Raise Ticket</h2>
+      <p className="mb-4 text-center">Order ID: {orderId}</p>
       <form onSubmit={handleSubmitTicket}>
         <div className="mb-4">
           <label htmlFor="subject" className="block text-gray-700 font-bold mb-2">
