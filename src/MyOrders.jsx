@@ -275,11 +275,15 @@ const MyOrders = () => {
           <thead>
             <tr>
               <th className="px-4 py-2">Order ID</th>
+              {window.innerWidth>768 && (
+              <>
               <th className="px-4 py-2">Order Date</th>
               <th className="px-4 py-2">Delivery Date</th>
               <th className="px-4 py-2">Pickup Date</th>
               <th className="px-4 py-2">Total Amount</th>
               <th className="px-4 py-2">Order Status</th>
+              </>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -290,11 +294,15 @@ const MyOrders = () => {
                 onClick={() => handleOrderClick(order)}
               >
                 <td className="border px-4 py-2">{order.orderId}</td>
+                {window.innerWidth > 768 && (
+                <>
                 <td className="border px-4 py-2">{order.orderDate}</td>
                 <td className="border px-4 py-2">{order.deliveryDate}</td>
                 <td className="border px-4 py-2">{order.pickupDate}</td>
                 <td className="border px-4 py-2">{order.totalOrderAmount}</td>
                 <td className="border px-4 py-2">{order.orderStatus}</td>
+                </>
+                )}
               </tr>
             ))}
           </tbody>
