@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import OrderStepper from './OrderStepper';
 
@@ -17,6 +16,7 @@ const orderStages = [
 const OrderModal = ({ order, onClose }) => {
   if (!order) return null;
   const modalRef = useRef(null);
+  const stepperRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,10 +37,10 @@ const OrderModal = ({ order, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-end md:items-center z-50">
+    <div className="fixed inset-0 flex justify-center items-end md:items-center z-50  ">
       <div
         ref={modalRef}
-        className="bg-white rounded-t-lg md:rounded-lg shadow-lg p-6 w-full md:w-auto h-4/5 md:h-auto overflow-y-auto md:max-h-full"
+        className="bg-white rounded-t-lg md:rounded-lg shadow-lg p-6 w-full md:w-auto h-4/5 md:h-auto overflow-y-auto md:max-h-full border border-gray-300"
       >
         <div className="flex flex-row justify-between align-middle">
           <h2 className="text-xl font-bold p-2 mb-2">Order Details</h2>
@@ -56,11 +56,13 @@ const OrderModal = ({ order, onClose }) => {
             </svg>
           </button>
         </div>
-        <OrderStepper currentStage={order.orderStatus} stages={orderStages} />
+        <div className="overflow-x-auto" ref={stepperRef}>
+          <OrderStepper currentStage={order.orderStatus} stages={orderStages} />
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className=" font-bold">ORDER ID:</p>
-            <p className="text-gray-600">{order.orderId}</p>
+            <p className="text-gray-600 ">{order.orderId}</p>
           </div>
           <div>
             <p className="font-bold">Order Date:</p>
@@ -87,8 +89,16 @@ const OrderModal = ({ order, onClose }) => {
           <h3 className="text-lg font-bold mb-2 ">Order items</h3>
           {order.items.map((item) => (
             <div key={item.productName} className="flex item-center mb-2 ">
-              <img src={item.imageUrl} alt={item.productName} className="w-10 h-10 mr-2" />
-              <div>
+              <img
+                src={item.imageUrl}
+                alt={item.productName}
+                style={{
+                  maxWidth: window.innerWidth <= 768 ? '10vw' : '11vw',
+                  maxHeight: window.innerWidth <= 768 ? '10vw' : '11vw',
+                  margin: '10px',
+                }}
+              />
+              <div className='px-4'>
                 <p className="font-bold">{item.productName}</p>
                 <p>Size: {item.size}</p>
                 <p>Quantity: {item.quantity}</p>

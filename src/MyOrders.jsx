@@ -24,14 +24,14 @@ const MyOrders = () => {
                     "size": "EU40 - UK6.5",
                     "quantity": 1,
                     "rent": "₹1539",
-                    "imageUrl": "url_to_image"
+                    "imageUrl": "https://contents.mediadecathlon.com/p1144537/dfa2801f7269e1b78e6c2f502fe513c7/p1144537.jpg?format=auto&quality=70&f=1024x0"
                   },
                   {
                     "productName": "TREK 100 Trekking Shoes - Women's",
                     "size": "EU38 - UK5",
                     "quantity": 1,
                     "rent": "₹1539",
-                    "imageUrl": "url_to_image"
+                    "imageUrl": "https://contents.mediadecathlon.com/p1144537/dfa2801f7269e1b78e6c2f502fe513c7/p1144537.jpg?format=auto&quality=70&f=1024x0"
                   }
                 ]
               },

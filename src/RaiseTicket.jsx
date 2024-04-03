@@ -26,7 +26,7 @@ const RaiseTicket = () => {
   const notify = () => toast('Ticket submitted, feel free to raise another one !');
 
   return (
-    <div className="container mx-auto mt-8 px-4">
+    <div className="container mx-auto mt-8 px-4 border p-4 w-4/5 rounded-lg border-gray-300">
       <ToastContainer />
       <h2 className="text-2xl font-bold mb-4 text-center">Raise Ticket</h2>
       <p className="mb-4 text-center">Order ID: {orderId}</p>
